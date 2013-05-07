@@ -30,11 +30,12 @@ namespace TimeInformation
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                        "~/Scripts/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/bundle/bootstrap").Include("~/Scripts/bootstrap.js"));
-            bundles.Add(new ScriptBundle("~/bundle/backbone")
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include("~/Scripts/bootstrap.js"));
+            bundles.Add(new ScriptBundle("~/bundles/backbone")
+                .Include("~/Scripts/underscore.js")
                 .Include("~/Scripts/backbone.js")
                 .Include("~/Scripts/json2.js")
-                .Include("~/Scripts/underscore.js"));
+                );
             #endregion
         }
     }
