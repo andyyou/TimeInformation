@@ -157,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <None Include="Content\less\Readme.md" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -177,6 +178,20 @@
     <Content Include="Content\font\fontawesome-webfont.svg" />
     <Content Include="Content\images\glyphicons-halflings-white.png" />
     <Content Include="Content\images\glyphicons-halflings.png" />
+    <Content Include="Content\less\tests\buttons.html" />
+    <Content Include="Content\less\tests\css-tests.css" />
+    <Content Include="Content\less\tests\css-tests.html" />
+    <Content Include="Content\less\tests\forms-responsive.html" />
+    <Content Include="Content\less\tests\forms.html" />
+    <Content Include="Content\less\tests\navbar-fixed-top.html" />
+    <Content Include="Content\less\tests\navbar-static-top.html" />
+    <Content Include="Content\less\tests\navbar.html" />
+    <Content Include="Content\less\variables.css">
+      <DependentUpon>variables.less</DependentUpon>
+    </Content>
+    <Content Include="Content\less\variables.min.css">
+      <DependentUpon>variables.less</DependentUpon>
+    </Content>
     <Content Include="Content\normalize.css" />
     <Content Include="Content\sheet.css" />
     <Content Include="Global.asax" />
