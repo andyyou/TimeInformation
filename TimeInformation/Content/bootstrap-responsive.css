@@ -1,4 +1,4 @@
-/*!
+﻿/*!
  * Bootstrap Responsive v2.3.1
  *
  * Copyright 2012 Twitter, Inc
@@ -225,7 +225,7 @@
   }
   .row-fluid .span11 {
     width: 91.45299145299145%;
-    *width: 91.39979996362975%;
+    *width: 91.39979996362974%;
   }
   .row-fluid .span10 {
     width: 82.90598290598291%;
@@ -233,7 +233,7 @@
   }
   .row-fluid .span9 {
     width: 74.35897435897436%;
-    *width: 74.30578286961266%;
+    *width: 74.30578286961265%;
   }
   .row-fluid .span8 {
     width: 65.81196581196582%;
@@ -256,7 +256,7 @@
     *width: 31.570740134569924%;
   }
   .row-fluid .span3 {
-    width: 23.076923076923077%;
+    width: 23.076923076923076%;
     *width: 23.023731587561375%;
   }
   .row-fluid .span2 {
@@ -297,11 +297,11 @@
   }
   .row-fluid .offset9:first-child {
     margin-left: 76.92307692307693%;
-    *margin-left: 76.81669394435352%;
+    *margin-left: 76.81669394435351%;
   }
   .row-fluid .offset8 {
     margin-left: 70.94017094017094%;
-    *margin-left: 70.83378796144753%;
+    *margin-left: 70.83378796144752%;
   }
   .row-fluid .offset8:first-child {
     margin-left: 68.37606837606839%;
@@ -324,7 +324,7 @@
     *margin-left: 51.175668303327875%;
   }
   .row-fluid .offset5 {
-    margin-left: 45.299145299145295%;
+    margin-left: 45.299145299145294%;
     *margin-left: 45.1927623204219%;
   }
   .row-fluid .offset5:first-child {
@@ -349,10 +349,10 @@
   }
   .row-fluid .offset2 {
     margin-left: 19.65811965811966%;
-    *margin-left: 19.551736679396257%;
+    *margin-left: 19.551736679396256%;
   }
   .row-fluid .offset2:first-child {
-    margin-left: 17.094017094017094%;
+    margin-left: 17.094017094017093%;
     *margin-left: 16.98763411529369%;
   }
   .row-fluid .offset1 {
@@ -360,7 +360,7 @@
     *margin-left: 11.004728132387708%;
   }
   .row-fluid .offset1:first-child {
-    margin-left: 8.547008547008547%;
+    margin-left: 8.547008547008546%;
     *margin-left: 8.440625568285142%;
   }
   input,
@@ -574,19 +574,19 @@
   }
   .row-fluid .span11 {
     width: 91.43646408839778%;
-    *width: 91.38327259903608%;
+    *width: 91.38327259903607%;
   }
   .row-fluid .span10 {
     width: 82.87292817679558%;
     *width: 82.81973668743387%;
   }
   .row-fluid .span9 {
-    width: 74.30939226519337%;
+    width: 74.30939226519336%;
     *width: 74.25620077583166%;
   }
   .row-fluid .span8 {
-    width: 65.74585635359117%;
-    *width: 65.69266486422946%;
+    width: 65.74585635359116%;
+    *width: 65.69266486422945%;
   }
   .row-fluid .span7 {
     width: 57.18232044198895%;
@@ -630,7 +630,7 @@
   }
   .row-fluid .offset11:first-child {
     margin-left: 94.1988950276243%;
-    *margin-left: 94.09251204890089%;
+    *margin-left: 94.09251204890088%;
   }
   .row-fluid .offset10 {
     margin-left: 88.39779005524862%;
@@ -645,16 +645,16 @@
     *margin-left: 79.72787116492299%;
   }
   .row-fluid .offset9:first-child {
-    margin-left: 77.07182320441989%;
+    margin-left: 77.07182320441988%;
     *margin-left: 76.96544022569647%;
   }
   .row-fluid .offset8 {
     margin-left: 71.2707182320442%;
-    *margin-left: 71.16433525332079%;
+    *margin-left: 71.16433525332078%;
   }
   .row-fluid .offset8:first-child {
     margin-left: 68.50828729281768%;
-    *margin-left: 68.40190431409427%;
+    *margin-left: 68.40190431409426%;
   }
   .row-fluid .offset7 {
     margin-left: 62.70718232044199%;

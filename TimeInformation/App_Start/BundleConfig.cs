@@ -36,6 +36,9 @@ namespace TimeInformation
                 .Include("~/Scripts/backbone.js")
                 .Include("~/Scripts/json2.js")
                 );
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap-datepicker")
+                .Include("~/Scripts/bootstrap-datepicker.js")
+                .Include("~/Scripts/bootstrap-datepicker-globalize.js"));
             #endregion
         }
     }
