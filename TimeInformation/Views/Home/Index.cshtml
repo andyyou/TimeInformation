@@ -1,5 +1,15 @@
-﻿@{
-    ViewBag.Title = "Index";
+﻿@section scripts
+{
+    @Scripts.Render("~/bundles/bootstrap-datepicker")    
+    <script>
+        $(function () {
+            // Source: http://goo.gl/iPeJZ
+            $('.datepicker').datepicker();
+        });
+    </script>
 }
 
-<h2>Index</h2>
+<div class="input-append date datepicker" id="dp3" data-date="12-02-2012" data-date-format="yyyy-mm-dd">
+    <input class="span2" size="16" type="text" value="12-02-2012">
+    <span class="add-on"><i class="icon-th"></i></span>
+</div>
