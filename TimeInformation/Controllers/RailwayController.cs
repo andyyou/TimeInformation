@@ -22,8 +22,9 @@ namespace TimeInformation.Controllers
             List<StationList> stationList = JsonConvert.DeserializeObject<List<StationList>>(
                 File.ReadAllText(path)).Select(c => (StationList)c).ToList();
             
-            string fromStationCode = stationList.Where(s => s.zh_TW == FromStation || s.en_US == FromStation).FirstOrDefault().Station;
-            string toStationCode = stationList.Where(s => s.zh_TW == ToStation || s.en_US == ToStation).FirstOrDefault().Station;
+            // Get station code from list
+            string fromStationCode = stationList.Where(s => s.zh_TW == FromStation || s.en_US == FromStation).SingleOrDefault().Station;
+            string toStationCode = stationList.Where(s => s.zh_TW == ToStation || s.en_US == ToStation).SingleOrDefault().Station;
 
 
             return new string[] { fromStationCode, toStationCode, GetinDate.ToShortDateString() };
