@@ -5969,7 +5969,6 @@ a.badge:focus {
 .datepicker {
   top: 0;
   left: 0;
-  padding: 4px;
   margin-top: 1px;
   /*.dow {
 		border-top: 1px solid #ddd !important;
