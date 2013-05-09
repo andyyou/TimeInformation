@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="TaiTrainList">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="unbounded" minOccurs="1" ref="TrainInfo"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="TimeInfo">
+        <xsd:complexType>
+            <xsd:attribute name="ARRTime" type="xsd:string" use="required"/>
+            <xsd:attribute name="DEPTime" type="xsd:string" use="required"/>
+            <xsd:attribute name="Order" type="xsd:string" use="required"/>
+            <xsd:attribute name="Route" type="xsd:string" use="required"/>
+            <xsd:attribute name="Station" type="xsd:string" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="TrainInfo">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="unbounded" minOccurs="1" ref="TimeInfo"/>
+            </xsd:sequence>
+            <xsd:attribute name="CarClass" type="xsd:string" use="required"/>
+            <xsd:attribute name="Cripple" type="xsd:string" use="required"/>
+            <xsd:attribute name="Dinning" type="xsd:string" use="required"/>
+            <xsd:attribute name="Line" type="xsd:string" use="required"/>
+            <xsd:attribute name="LineDir" type="xsd:string" use="required"/>
+            <xsd:attribute name="Note" type="xsd:string" use="required"/>
+            <xsd:attribute name="OverNightStn" type="xsd:string" use="required"/>
+            <xsd:attribute name="Package" type="xsd:string" use="required"/>
+            <xsd:attribute name="Route" type="xsd:string" use="required"/>
+            <xsd:attribute name="Train" type="xsd:string" use="required"/>
+            <xsd:attribute name="Type" type="xsd:string" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>
