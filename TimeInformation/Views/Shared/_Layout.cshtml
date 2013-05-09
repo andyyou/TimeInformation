@@ -20,7 +20,7 @@
                 <a class="brand" href="#"><i class="icon-github"></i> TIS! </a>
                 <div class="nav-collapse collapse">
                     <ul class="nav">
-                        <li><a href="#about">About</a></li>
+                        <li><a href="#about" data-toggle="modal">About</a></li>
                     </ul>
                 </div>
                 <!--/.nav-collapse -->
@@ -46,7 +46,22 @@
 
     </div>
     <!-- /container -->
-
+    
+    <div id="about" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="modal-label">About TIS</h3>
+        </div>
+        <div class="modal-body">
+            <p>
+                Time Information System is used for lookup railway timetable.
+            </p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        </div>
+    </div>
+    <!-- /modal -->
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
