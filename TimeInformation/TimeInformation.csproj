@@ -171,11 +171,13 @@
     <None Include="Content\less\Readme.md" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RailwayController.cs" />
+    <Compile Include="Controllers\StationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\StationList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Scripts\stations.json" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
