@@ -177,7 +177,7 @@
     </Compile>
     <Compile Include="Models\StationList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Content Include="Scripts\stations.json" />
+    <None Include="Json\stations.json" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />

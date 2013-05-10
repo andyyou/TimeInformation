@@ -6,15 +6,20 @@
             // Source: http://goo.gl/iPeJZ
             $('.datepicker').datepicker();
 
-            $.getJSON('Scripts/stations.js', function (data) {
-                console.log('success');
+            var stations = [];
+            $.getJSON('Json/stations.json', function (data) { console.log('success');
                 $.each(data.stations, function (i, station) {
-                    alert(station.Station);
+                    stations.push(station.zh_TW);
                 });
             }).error(function () {
                 console.log('error');
             });
+
+            $('#FromStation').typeahead({ source: stations });
+            $('#ToStation').typeahead({ source: stations });
         });
+        
+
     </script>
 
     <style type="text/css">
