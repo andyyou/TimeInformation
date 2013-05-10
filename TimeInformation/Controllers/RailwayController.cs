@@ -33,10 +33,10 @@ namespace TimeInformation.Controllers
             // Delete expired xml file
             DateTime dtToday = DateTime.Today;
             DirectoryInfo di = new DirectoryInfo(xmlFolder);
-            FileInfo[] xmlFiles = di.GetFiles();
+            FileInfo[] xmlFiles = di.GetFiles("*.xml");
             foreach (var file in xmlFiles)
             {
-                DateTime dtFile = DateTime.ParseExact(file.Name.Substring(0, 8), new string[] { "yyyyMMdd" }, System.Globalization.CultureInfo.InvariantCulture,System.Globalization.DateTimeStyles.AllowWhiteSpaces);
+                DateTime dtFile = DateTime.ParseExact(file.Name.Substring(0, 8), new string[] { "yyyyMMdd" }, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.AllowWhiteSpaces);
                 if (DateTime.Compare(dtToday, dtFile) > 0)
                 {
                     File.Delete(file.FullName);
@@ -62,23 +62,53 @@ namespace TimeInformation.Controllers
 
             #region Parse Data
 
-            string stationFilePath = System.Web.HttpContext.Current.Server.MapPath("~/App_Data/StationList.json");
+            //string stationFilePath = System.Web.HttpContext.Current.Server.MapPath("~/App_Data/StationList.json");
 
             // Deserialize json file to list
-            List<StationList> stationList = JsonConvert.DeserializeObject<List<StationList>>(
-                File.ReadAllText(stationFilePath)).Select(c => (StationList)c).ToList();
-            
+            //List<StationList> stationList = JsonConvert.DeserializeObject<List<StationList>>(
+            //    File.ReadAllText(stationFilePath)).Select(c => (StationList)c).ToList();
+
             // Get station code from list
             //string fromStationCode = stationList.Where(s => s.zh_TW == FromStation || s.en_US == FromStation).SingleOrDefault().Station;
             //string toStationCode = stationList.Where(s => s.zh_TW == ToStation || s.en_US == ToStation).SingleOrDefault().Station;
 
             // Parse XML
             XmlSerializer ser = new XmlSerializer(typeof(TaiTrainList));
-            TaiTrainList ttl = ser.Deserialize(new FileStream(localXmlPath, FileMode.Open)) as TaiTrainList;
+            TaiTrainList allTrain = ser.Deserialize(new FileStream(localXmlPath, FileMode.Open)) as TaiTrainList;
+            List<TrainInfo> trainInfo = allTrain.TrainInfo.Where(t => t.TimeInfo != null).ToList();
+
+            var fromTrainList = trainInfo.SelectMany(t => t.TimeInfo, (t, i) =>
+                new
+                {
+                    // TrainInfo
+                    Train = t.Train,
+                    CarClass = t.CarClass,
+                    Note = t.Note,
+                    // TimeInfo
+                    FromOrder = i.Order,
+                    FromStation = i.Station,
+                    FromARRTime = i.ARRTime,
+                    FromDEPTime = i.DEPTime
+                })
+                .Where(i => i.FromStation == fromStation).ToList();
+            var toTrainList = trainInfo.SelectMany(t => t.TimeInfo, (t, i) =>
+                new
+                {
+                    // TrainInfo
+                    Train = t.Train,
+                    CarClass = t.CarClass,
+                    Note = t.Note,
+                    // TimeInfo
+                    ToOrder = i.Order,
+                    ToStation = i.Station,
+                    ToARRTime = i.ARRTime,
+                    ToDEPTime = i.DEPTime
+                })
+                .Where(i => i.ToStation == toStation).ToList();
 
             #endregion
 
-            return new string[] { fromStation, toStation, getinDate.ToShortDateString() };
+            return new string[] { fromStation, toStation,fromTrainList.Count().ToString(), toTrainList.Count().ToString() };
         }
 
         // GET api/railway/5
