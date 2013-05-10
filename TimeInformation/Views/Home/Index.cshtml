@@ -1,10 +1,19 @@
 ﻿@section scripts
 {
-    @Scripts.Render("~/bundles/bootstrap-datepicker")    
+    @Scripts.Render("~/bundles/bootstrap-datepicker")  
     <script>
         $(function () {
             // Source: http://goo.gl/iPeJZ
             $('.datepicker').datepicker();
+
+            $.getJSON('Scripts/stations.js', function (data) {
+                console.log('success');
+                $.each(data.stations, function (i, station) {
+                    alert(station.Station);
+                });
+            }).error(function () {
+                console.log('error');
+            });
         });
     </script>
 
