@@ -4,14 +4,15 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Mvc;
 
 namespace TimeInformation.Controllers
 {
-    public class StationController : ApiController
+    public class StationController : Controller
     {
-        public string Get()
-        { 
-            return "Taipei";
+        public JsonResult Get()
+        {
+            return Json("{name: 'andy'}", JsonRequestBehavior.AllowGet);
         }
     }
 }
