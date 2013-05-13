@@ -1,0 +1,156 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset='utf-8' />
+	<meta name='viewport' content='width=device-width, initial-scale=1.0' />
+	<title>Helo, Backbone Collection</title>
+</head>
+
+<body>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
+<script src="http://documentcloud.github.com/backbone/backbone-min.js"></script>
+<script>
+(function($){
+	Person = Backbone.Model.extend({
+		initialize: function()
+		{
+			console.log('Person is initialized');
+		},
+		defaults:
+		{
+			name: 'undefined',
+			age: 'undefined'
+		}
+	});
+	
+	People = Backbone.Collection.extend({
+		initialize: function()
+		{
+			console.log('People is initialized');
+		},
+		model: Person
+	});
+	
+	var person = new Person({name: 'Andy'});
+	var people = new People(person);
+	console.log(person.get('name'));
+	
+	// !important
+	people.each(function(p){
+		console.log(p.get('name') + ' from _each people.');
+	});
+	// add
+	people.add(new Person({name: 'Calvert'}));
+	_.each(people.models,function(p){
+		console.log(p.get('name') + ' from _each people.');
+	});
+	// push
+	people.push([{name:"Bob"}, {name:"Jim"}]);
+	people.each(function(p){
+		console.log(p.get('name') + '!!');
+	});
+	// reset 清除原來的資料，加入新資料。
+	people.reset({name: 'Cool'});
+	_.each(people.models, function(p){
+		console.log(p.get('name'));
+	});
+	
+	// remove
+	var p1 = new Person({name:'A'});
+	people.add([p1, {name:'B'}, {name:'C'}])
+	people.remove(p1);
+	people.remove(1);
+	people.remove({name:'B'});
+	_.each(people.models, function(p){
+		console.log(p.get('name'));
+	});
+	
+	// listen events
+	people.on('reset', function(){
+		console.log('listen trigger: reset()');
+	});
+	people.reset({name: 'Cool2'});
+	console.log(people.models);
+	// to json
+	console.log(people.toJSON());
+	
+	// define sorted collection
+	Team = Backbone.Collection.extend({
+		model: Person,
+		comparator: function(p1,p2)
+		{
+			return p1.get('name') < p2.get('name');
+		}
+	});
+	
+	// 單純取某 attr 排成陣列
+	people.reset([{name: 'Andy'}, {name:'Bill'}, {name:'Cat'}]);
+	var ary = people.pluck('name');
+	_.each(ary,function(a){
+		console.log(a);
+	});
+	
+	// Get one object of Collection
+	var team = new Backbone.Collection([
+		{name: 'Andy', job:'programmer'},
+		{name: 'Calvert', job:'programmer'},
+		{name: 'Ken', job:'programmer'},
+		{name: 'Shine', job:'designer'}
+		
+	]);
+	team.each(function(t){
+		console.log(t.get('job'));
+	});
+	
+	console.log('---developers---');
+	
+	var developers = team.where({job: 'programmer'});
+	console.log(developers.length);
+	_.each(developers, function(d){
+	
+		console.log(d.get('name'));
+	});
+	
+	jQuery.support.cors = true;
+	
+	var url = "http://tis.azurewebsites.net/api/Railway"; 
+	var url2 = 'http://tis.azurewebsites.net/api/station';
+	var url3 = 'http://tis.azurewebsites.net/station/get';
+	
+	Train = Backbone.Model.extend({});
+	Trains = Backbone.Collection.extend({
+		url: 'api/Railway',
+		model: Train,
+		defaults: {
+			model: Train
+		}
+	});
+	
+	var trains = new Trains();
+	trains.fetch({ data: { FromStation: 1012, ToStation: 1008, GetinDate: '2013-05-13' } });
+	
+	trains.each(function(t){
+		console.log(t.get('Train'));
+	});
+	
+	
+    
+	$.ajax({
+		type: "GET",
+		url: url3,
+		dataType: "jsonp",
+		// data: { FromStation: '1012', ToStation: '1008', GetinDate: '2013-05-13' },
+		success: function (data) {
+			console.log(data.name);
+		},
+		error: function(data)
+		{
+			console.log(data);
+		}
+	});
+	
+})(jQuery);
+</script>
+</body>
+</html>
