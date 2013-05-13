@@ -9,6 +9,9 @@ namespace TimeInformation.Controllers
 {
     public class StationController : ApiController
     {
-
+        public string Get()
+        { 
+            return "Taipei";
+        }
     }
 }
