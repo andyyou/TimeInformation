@@ -167,7 +167,6 @@
       <DependentUpon>bootstrap.less</DependentUpon>
     </Content>
     <Content Include="Content\less\datepicker.less" />
-    <Content Include="App_Data\StationList.json" />
     <None Include="App_Data\TaiTrainInfo.xsd">
       <SubType>Designer</SubType>
     </None>
