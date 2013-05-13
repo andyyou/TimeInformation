@@ -180,6 +180,7 @@
     </Compile>
     <Compile Include="Models\StationList.cs" />
     <Compile Include="Models\TaiTrainInfo.cs" />
+    <Compile Include="Models\TimeTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Scripts\stations.json" />
   </ItemGroup>

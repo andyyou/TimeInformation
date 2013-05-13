@@ -15,7 +15,7 @@ namespace TimeInformation.Controllers
     public class RailwayController : ApiController
     {
         // GET api/railway
-        public IEnumerable<string> Get(string fromStation, string toStation, DateTime getinDate)
+        public IEnumerable<TimeTable> Get(string fromStation, string toStation, DateTime getinDate)
         {
             // Verify GetinDate, tra only provide 45 days timetable
             if ((DateTime.Compare(DateTime.Today, getinDate) > 0) ||
@@ -73,8 +73,9 @@ namespace TimeInformation.Controllers
             //string toStationCode = stationList.Where(s => s.zh_TW == ToStation || s.en_US == ToStation).SingleOrDefault().Station;
 
             // Parse XML
+
             XmlSerializer ser = new XmlSerializer(typeof(TaiTrainList));
-            TaiTrainList allTrain = ser.Deserialize(new FileStream(localXmlPath, FileMode.Open)) as TaiTrainList;
+            TaiTrainList allTrain = ser.Deserialize(new StreamReader(localXmlPath)) as TaiTrainList;
             List<TrainInfo> trainInfo = allTrain.TrainInfo.Where(t => t.TimeInfo != null).ToList();
 
             var fromTrainList = trainInfo.SelectMany(t => t.TimeInfo, (t, i) =>
@@ -83,14 +84,17 @@ namespace TimeInformation.Controllers
                     // TrainInfo
                     Train = t.Train,
                     CarClass = t.CarClass,
+                    Line = t.Line,
+                    Origin = t.TimeInfo.First().Station,
+                    Dest = t.TimeInfo.Last().Station,
                     Note = t.Note,
                     // TimeInfo
-                    FromOrder = i.Order,
-                    FromStation = i.Station,
-                    FromARRTime = i.ARRTime,
-                    FromDEPTime = i.DEPTime
+                    Order = Convert.ToInt32(i.Order),
+                    Station = i.Station,
+                    ARRTime = i.ARRTime,
+                    DEPTime = i.DEPTime
                 })
-                .Where(i => i.FromStation == fromStation).ToList();
+                .Where(i => i.Station == fromStation).ToList();
             var toTrainList = trainInfo.SelectMany(t => t.TimeInfo, (t, i) =>
                 new
                 {
@@ -99,16 +103,38 @@ namespace TimeInformation.Controllers
                     CarClass = t.CarClass,
                     Note = t.Note,
                     // TimeInfo
-                    ToOrder = i.Order,
-                    ToStation = i.Station,
-                    ToARRTime = i.ARRTime,
-                    ToDEPTime = i.DEPTime
+                    Order = Convert.ToInt32(i.Order),
+                    Station = i.Station,
+                    ARRTime = i.ARRTime,
+                    DEPTime = i.DEPTime
                 })
-                .Where(i => i.ToStation == toStation).ToList();
+                .Where(i => i.Station == toStation).ToList();
 
+            List<TimeTable> timeTable = new List<TimeTable>();
+
+            foreach (var fromTrain in fromTrainList)
+            {
+                foreach (var toTrain in toTrainList)
+                {
+                    if (fromTrain.Train == toTrain.Train && fromTrain.Order < toTrain.Order)
+                    {
+                        timeTable.Add(new TimeTable
+                        {
+                            Train = fromTrain.Train,
+                            CarClass = fromTrain.CarClass,
+                            Line = fromTrain.Line,
+                            Origin = fromTrain.Origin,
+                            Dest = fromTrain.Dest,
+                            DEPTime = fromTrain.DEPTime,
+                            ARRTime = toTrain.ARRTime,
+                            Note = fromTrain.Note
+                        });
+                    }
+                }
+            }
+
+            return timeTable.OrderBy(t => t.DEPTime);
             #endregion
-
-            return new string[] { fromStation, toStation,fromTrainList.Count().ToString(), toTrainList.Count().ToString() };
         }
 
         // GET api/railway/5
